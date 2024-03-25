@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        // $credentials = $request->only('email', 'password');
+        if (Auth::attempt(['email'=>$request->username,'password'=>$request->password],true)) {
+
+            return redirect()->route('home');
+        }else {
+
+            if (Auth::attempt(['username'=>$request->username,'password'=>$request->password],true)) {
+                return redirect()->route('home');
+
+            }
+
+        }
+
+        // return 1;
+        return redirect("login")->withErrors(['msg' => 'Login failed, Invalid username or password!']);
+    }
+
 }
