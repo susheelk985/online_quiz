@@ -303,12 +303,12 @@
 
                 questionText+= '<div class="option"><span><p>'+(i+1)+'. '+questions[i]['question']+'</p></span></div><div class="option"><span><p>Ans: '+questions[i]['answer']+'</p><br></span></div>';
             }
-            if ((100 * userScore) / 3 > 59) { // if user scored more than 3
+            if ((100 * userScore) / 5 > 59) { // if user scored more than 3
                 //creating a new span tag and passing the user score number and total question number
                 let scoreTag = '<center><span style="color:red">Winner! 🎉</span></center>';
                 scoreText.innerHTML = scoreTag; //adding new span tag inside score_Text
                 questionsText.innerHTML = questionText+scoreTag; //adding new span tag inside score_Text
-            } else if ((100 * userScore) / 3>39) { // if user scored more than 1
+            } else if ((100 * userScore) / 5>39) { // if user scored more than 1
                 let scoreTag = '<center><span style="color:red">and Better 😎</span></center>';
                 scoreText.innerHTML = scoreTag;
                 questionsText.innerHTML = questionText+scoreTag;
